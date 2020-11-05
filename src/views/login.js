@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../App.css";
-
+import Button from '../components/elements/Button';
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -137,7 +137,7 @@ class App extends Component {
               )}
             </div>
             <div className="createAccount">
-              <button type="submit">Create Account</button>
+              <Button color="primary" tag="a" href="/dashboard" type="submit">Create Account</Button>
               <br></br>
             </div>
           </form>

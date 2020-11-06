@@ -47,7 +47,7 @@ let chart1_2_options = {
         },
         ticks: {
           suggestedMin: 60,
-          suggestedMax: 125,
+          suggestedMax: 100,
           padding: 20,
           fontColor: "#9a9a9a"
         }
@@ -62,6 +62,8 @@ let chart1_2_options = {
           zeroLineColor: "transparent"
         },
         ticks: {
+          suggestedMin: 60,
+          suggestedMax: 100,
           padding: 20,
           fontColor: "#9a9a9a"
         }
@@ -100,7 +102,7 @@ let chartExample1 = {
       ],
       datasets: [
         {
-          label: "My First dataset",
+          label: "Attendance",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: "#1f8ef1",
@@ -114,7 +116,7 @@ let chartExample1 = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100]
+          data: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 100, 100]
         }
       ]
     };
@@ -159,7 +161,7 @@ let chartExample1 = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120]
+          data: [80, 100, 100, 100, 95, 100, 90, 100, 80, 95, 70, 100]
         }
       ]
     };
@@ -204,7 +206,7 @@ let chartExample1 = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]
+          data: [60, 80, 65, 100, 80, 100, 90, 100, 70, 100, 60, 100]
         }
       ]
     };
@@ -226,10 +228,10 @@ let chartExample2 = {
     gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
 
     return {
-      labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+      labels: ["C", "ADE", "AP", "CALC", "ENG"],
       datasets: [
         {
-          label: "Data",
+          label: "Mark",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: "#1f8ef1",
@@ -239,11 +241,11 @@ let chartExample2 = {
           pointBackgroundColor: "#1f8ef1",
           pointBorderColor: "rgba(255,255,255,0)",
           pointHoverBackgroundColor: "#1f8ef1",
-          pointBorderWidth: 20,
+          pointBorderWidth: 10,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [80, 100, 70, 80, 120, 80]
+          data: [80, 100, 70, 80, 90, 60]
         }
       ]
     };
@@ -265,10 +267,10 @@ let chartExample3 = {
     gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
 
     return {
-      labels: ["USA", "GER", "AUS", "UK", "RO", "BR"],
+      labels: ["ALA", "PROB", "C++", "CO", "DS"],
       datasets: [
         {
-          label: "Countries",
+          label: "Mark",
           fill: true,
           backgroundColor: gradientStroke,
           hoverBackgroundColor: gradientStroke,
@@ -276,7 +278,7 @@ let chartExample3 = {
           borderWidth: 2,
           borderDash: [],
           borderDashOffset: 0.0,
-          data: [53, 20, 10, 80, 100, 45]
+          data: [53, 100, 100, 80, 100, 45]
         }
       ]
     };
@@ -307,7 +309,7 @@ let chartExample3 = {
           },
           ticks: {
             suggestedMin: 60,
-            suggestedMax: 120,
+            suggestedMax: 100,
             padding: 20,
             fontColor: "#9e9e9e"
           }
@@ -344,10 +346,10 @@ const chartExample4 = {
     gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors
 
     return {
-      labels: ["JUL", "AUG", "SEP", "OCT", "NOV"],
+      labels: ["MFOC", "DAA", "DBMS", "MPES", "TT"],
       datasets: [
         {
-          label: "My First dataset",
+          label: "Mark",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: "#00d6b4",
@@ -357,11 +359,11 @@ const chartExample4 = {
           pointBackgroundColor: "#00d6b4",
           pointBorderColor: "rgba(255,255,255,0)",
           pointHoverBackgroundColor: "#00d6b4",
-          pointBorderWidth: 20,
+          pointBorderWidth: 10,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [90, 27, 60, 12, 80]
+          data: [80, 70, 90, 80, 90]
         }
       ]
     };
@@ -394,7 +396,7 @@ const chartExample4 = {
           },
           ticks: {
             suggestedMin: 50,
-            suggestedMax: 125,
+            suggestedMax: 100,
             padding: 20,
             fontColor: "#9e9e9e"
           }
@@ -418,10 +420,147 @@ const chartExample4 = {
     }
   }
 };
+let chartExample5 = {
+  data1: canvas => {
+    let ctx = canvas.getContext("2d");
 
+    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke.addColorStop(1, "rgba(66,134,121,0.0)");
+    gradientStroke.addColorStop(0.4, "rgba(66,134,121,0.0)"); //green colors
+    gradientStroke.addColorStop(0, "rgba(66,134,121,0)");
+    return {
+      labels: [
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC"
+      ],
+      datasets: [
+        {
+          label: "Attendance",
+          fill: true,
+          backgroundColor: gradientStroke,
+          borderColor: "#1f8ef1",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          pointBackgroundColor: "#1f8ef1",
+          pointBorderColor: "rgba(255,255,255,0)",
+          pointHoverBackgroundColor: "#1f8ef1",
+          pointBorderWidth: 20,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 4,
+          data: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 100, 100]
+        }
+      ]
+    };
+  },
+  data2: canvas => {
+    let ctx = canvas.getContext("2d");
+
+    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
+    gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
+    gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+
+    return {
+      labels: [
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC"
+      ],
+      datasets: [
+        {
+          label: "My First dataset",
+          fill: true,
+          backgroundColor: gradientStroke,
+          borderColor: "#1f8ef1",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          pointBackgroundColor: "#1f8ef1",
+          pointBorderColor: "rgba(255,255,255,0)",
+          pointHoverBackgroundColor: "#1f8ef1",
+          pointBorderWidth: 20,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 4,
+          data: [80, 100, 100, 100, 95, 100, 90, 100, 80, 95, 70, 100]
+        }
+      ]
+    };
+  },
+  data3: canvas => {
+    let ctx = canvas.getContext("2d");
+
+    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
+    gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
+    gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+
+    return {
+      labels: [
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC"
+      ],
+      datasets: [
+        {
+          label: "My First dataset",
+          fill: true,
+          backgroundColor: gradientStroke,
+          borderColor: "#1f8ef1",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          pointBackgroundColor: "#1f8ef1",
+          pointBorderColor: "rgba(255,255,255,0)",
+          pointHoverBackgroundColor: "#1f8ef1",
+          pointBorderWidth: 20,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 4,
+          data: [60, 80, 65, 100, 80, 100, 90, 100, 70, 100, 60, 100]
+        }
+      ]
+    };
+  },
+  options: chart1_2_options
+};
 module.exports = {
   chartExample1, // in src/views/Dashboard.js
   chartExample2, // in src/views/Dashboard.js
   chartExample3, // in src/views/Dashboard.js
-  chartExample4 // in src/views/Dashboard.js
+  chartExample4, // in src/views/Dashboard.js
+  chartExample5
 };

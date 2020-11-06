@@ -1,26 +1,20 @@
 /*!
-
 =========================================================
 * Black Dashboard React v1.1.0
 =========================================================
-
 * Product Page: https://www.creative-tim.com/product/black-dashboard-react
 * Copyright 2020 Creative Tim (https://www.creative-tim.com)
 * Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
 * Coded by Creative Tim
-
 =========================================================
-
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
 import {Navbar,Nav} from "react-bootstrap";
+import {Line,Bar} from "react-chartjs-2"
 import "../assets/scss/black-dashboard-react.scss";
 import "../assets/css/nucleo-icons.css";
 // reactstrap components
@@ -67,11 +61,17 @@ class Dashboard extends React.Component {
   render() {
     return (
       <>
-       <Navbar bg="dark" variant="dark">
+         <Navbar bg="dark" variant="dark">
     <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#features">Features</Nav.Link>
-      <Nav.Link href="#pricing">Pricing</Nav.Link>
+      <Nav.Link href="/dashboard">Home</Nav.Link>
+      <Nav.Link href="/attendance">Attendance details</Nav.Link>
+      <Nav.Link href="/payment">Fees</Nav.Link>
+      <Nav.Link href="/ca">Interal Marks</Nav.Link>
+      <Nav.Link href="/library">Library</Nav.Link>
+      <Nav.Link href="/hostel">Hostel</Nav.Link>
+      <Nav.Link href="/timetable">Sem timetable</Nav.Link>
+      <Nav.Link href="/results">Sem Results</Nav.Link>
+      <Nav.Link href="/hostel">Events</Nav.Link>
     </Nav>
   </Navbar>
   <br />
@@ -82,8 +82,8 @@ class Dashboard extends React.Component {
                 <CardHeader>
                   <Row>
                     <Col className="text-left" sm="6">
-                      <h5 className="card-category">Total Shipments</h5>
-                      <CardTitle tag="h2">Performance</CardTitle>
+                      <h5 className="card-category">Dashboard</h5>
+                      <CardTitle tag="h2">Student attendance</CardTitle>
                     </Col>
                     <Col sm="6">
                       <ButtonGroup
@@ -107,7 +107,7 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Accounts
+                            SEM1
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-single-02" />
@@ -129,7 +129,7 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Purchases
+                            SEM2
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-gift-2" />
@@ -151,7 +151,7 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Sessions
+                            SEM3
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-tap-02" />
@@ -176,10 +176,10 @@ class Dashboard extends React.Component {
             <Col lg="4">
               <Card className="card-chart">
                 <CardHeader>
-                  <h5 className="card-category">Total Shipments</h5>
+                  <h5 className="card-category">SEM1</h5>
                   <CardTitle tag="h3">
-                    <i className="tim-icons icon-bell-55 text-info" />{" "}
-                    763,215
+                    <i className="tim-icons icon-send text-info" />{" "}
+                    Out of 100
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
@@ -195,10 +195,10 @@ class Dashboard extends React.Component {
             <Col lg="4">
               <Card className="card-chart">
                 <CardHeader>
-                  <h5 className="card-category">Daily Sales</h5>
+                  <h5 className="card-category">SEM2</h5>
                   <CardTitle tag="h3">
-                    <i className="tim-icons icon-delivery-fast text-primary" />{" "}
-                    3,500€
+                    <i className="tim-icons icon-send text-primary" />{" "}
+                    Out of 100
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
@@ -214,9 +214,9 @@ class Dashboard extends React.Component {
             <Col lg="4">
               <Card className="card-chart">
                 <CardHeader>
-                  <h5 className="card-category">Completed Tasks</h5>
+                  <h5 className="card-category">SEM3</h5>
                   <CardTitle tag="h3">
-                    <i className="tim-icons icon-send text-success" /> 12,100K
+                    <i className="tim-icons icon-send text-success" />{" "}Out of 100
                   </CardTitle>
                 </CardHeader>
                 <CardBody>

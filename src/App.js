@@ -9,7 +9,14 @@ import LayoutDefault from './layouts/LayoutDefault';
 import dashboard from '../src/black-dashboard-react-master/src/views/Dashboard'
 // Views 
 import Home from './views/Home';
-
+import library from './views/library';
+import hostel from './views/hostel';
+import Attendance from './views/Attendance';
+import Fees from './views/Fees';
+import Marks from './views/Marks';
+import timetable from './views/semtimetable';
+import result from './views/semresult';
+import events from './views/events';
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
 
@@ -39,6 +46,14 @@ const App = () => {
           <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
           <AppRoute exact path="/login" component={login}/>
           <AppRoute exact path="/dashboard" component={dashboard}/>
+          <AppRoute exact path="/attendance" component={Attendance}/>
+          <AppRoute exact path="/payment" component={Fees}/>
+          <AppRoute exact path="/ca" component={Marks}/>
+          <AppRoute exact path="/library" component={library}/>
+          <AppRoute exact path="/hostel" component={hostel}/>
+          <AppRoute exact path="/timetable" component={timetable}/>
+          <AppRoute exact path="/results" component={result}/>
+          <AppRoute exact path="/events" component={events}/>
         </Switch>
       )} />
   );

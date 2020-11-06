@@ -54,13 +54,13 @@ const Hero = ({
               <p className="m-0 mb-32 reveal-from-bottom" data-reveal-delay="400">
               Welcome to PSG college of technology,an ISO 9001:2015 certified institution is one of the foremost institutions founded by the PSG & Sons Trust.The college was
               established in the year 1951.
-                </p>
+                </p><br></br>
               <div className="reveal-from-bottom" data-reveal-delay="600">
                 <ButtonGroup>
                   <Button tag="a" color="primary" wideMobile href="/login">
                     Login for students
                     </Button>
-                  <Button tag="a" color="dark" wideMobile href="/staff">
+                  <Button tag="a" color="dark" wideMobile href="/login">
                     Login for staffs
                     </Button>
                 </ButtonGroup>

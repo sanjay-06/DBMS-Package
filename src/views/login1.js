@@ -1,87 +1,25 @@
-import React from "react";
-import { MDBInput, MDBBtn, MDBCol } from "mdbreact";
-import { BrowserRouter as Router, withRouter } from "react-router-dom";
-
-const usersJson = {
-  description: "Login and passwords of users",
-  users: {
-    testUser: {
-      password: "test",
-      type: "test"
-    }
-  }
-};
-
-class Login extends React.Component {
-  state = {
-    userName: "",
-    password: "",
-    usersJson: {}
-  };
-  componentDidMount() {
-    this.setState({ usersJson });
-  }
-
-  getLoginData = (value, type) =>
-    this.setState({
-      [type]: value
+import { useState } from 'react';
+import axios from 'axios';
+import { setUserSession } from './Utils/Common';
+ 
+function Login(props) {
+  const [loading, setLoading] = useState(false);
+  const username = useFormInput('');
+  const password = useFormInput('');
+  const [error, setError] = useState(null);
+ 
+  // handle button click of login form
+  const handleLogin = () => {
+    setError(null);
+    setLoading(true);
+    axios.post('http://localhost:3000/users/signin', { username: username.value, password: password.value }).then(response => {
+      setLoading(false);
+      setUserSession(response.data.token, response.data.user);
+      props.history.push('/dashboard');
+    }).catch(error => {
+      setLoading(false);
+      if (error.response.status === 401) setError(error.response.data.message);
+      else setError("Something went wrong. Please try again later.");
     });
-
-  onFormSubmit = e => {
-    e.preventDefault();
-    const { usersJson, userName, password } = this.state;
-    const filterUserName = Object.keys(usersJson.users).filter(
-      e => e === userName
-    );
-    if (
-      filterUserName.length > 0 &&
-      usersJson.users[userName].password === password
-    ) {
-      this.props.history.push("test");
-      window.localStorage.setItem(
-        "user",
-        JSON.stringify(usersJson.users[userName])
-      );
-    } else {
-      alert("Wrong login or password");
-    }
-  };
-  render() {
-    return (
-      <Router>
-        <MDBCol size="3">
-          <form onSubmit={this.onFormSubmit}>
-            <p className="h5 text-center mb-4">Sign in</p>
-            <div className="grey-text">
-              <MDBInput
-                label="Type your email"
-                icon="envelope"
-                group
-                type="text"
-                validate
-                error="wrong"
-                success="right"
-                getValue={value => this.getLoginData(value, "userName")}
-              />
-              <MDBInput
-                label="Type your password"
-                icon="lock"
-                group
-                type="password"
-                validate
-                getValue={value => this.getLoginData(value, "password")}
-              />
-            </div>
-            <div className="text-center">
-              <MDBBtn type="submit" onClick={this.onFormSubmit}>
-                Login
-              </MDBBtn>
-            </div>
-          </form>
-        </MDBCol>
-      </Router>
-    );
   }
 }
-
-export default withRouter(Login);

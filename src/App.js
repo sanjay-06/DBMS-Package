@@ -6,7 +6,7 @@ import ReactGA from 'react-ga';
 import login from './views/login';
 // Layouts
 import LayoutDefault from './layouts/LayoutDefault';
-import dashboard from '../src/black-dashboard-react-master/src/views/Dashboard'
+import dashboard from './black-dashboard-react-master/src/views/Dashboard'
 // Views 
 import Home from './views/Home';
 import library from './views/library';

@@ -17,6 +17,8 @@ import {Navbar,Nav} from "react-bootstrap";
 import {Line,Bar} from "react-chartjs-2"
 import "../assets/scss/black-dashboard-react.scss";
 import "../assets/css/nucleo-icons.css";
+
+
 // reactstrap components
 import {
   Button,
@@ -25,17 +27,10 @@ import {
   CardHeader,
   CardBody,
   CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  FormGroup,
-  Input,
   Table,
   Row,
   Col,
-  UncontrolledTooltip
+
 } from "reactstrap";
 
 // core components
@@ -52,7 +47,12 @@ class Dashboard extends React.Component {
     this.state = {
       bigChartData: "data1"
     };
+    this.handleClick = this.handleClick.bind(this);
   }
+  handleClick() 
+    {
+      this.props.history.push("/login")
+    }
   setBgChartData = name => {
     this.setState({
       bigChartData: name
@@ -62,7 +62,7 @@ class Dashboard extends React.Component {
     return (
       <>
          <Navbar bg="dark" variant="dark">
-    <Nav className="mr-auto">
+      <Nav className="mr-auto">
       <Nav.Link href="/dashboard">Home</Nav.Link>
       <Nav.Link href="/attendance">Attendance details</Nav.Link>
       <Nav.Link href="/payment">Fees</Nav.Link>
@@ -72,6 +72,7 @@ class Dashboard extends React.Component {
       <Nav.Link href="/timetable">Sem timetable</Nav.Link>
       <Nav.Link href="/results">Sem Results</Nav.Link>
       <Nav.Link href="/hostel">Events</Nav.Link>
+      <Button color="dark" onClick={this.handleClick} type="submit">Logout</Button>
     </Nav>
   </Navbar>
   <br />

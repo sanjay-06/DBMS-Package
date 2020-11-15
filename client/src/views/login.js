@@ -33,27 +33,17 @@ class App extends Component {
       apiResponse:""
     };
   }
-  callAPI()
-  {
-    fetch("http://localhost:9000/testapi")
-    .then(res=>res.text())
-    .then(res=>this.setState({apiResponse:res}));
-  }
-  componentWillMount()
-  {
-    this.callAPI();
-  }
 
   handleSubmit = e => {
     e.preventDefault();
     if(formValid(this.state))
     {
-    const firstname=this.state.firstName;
-    const email=this.state.email;
+    const username=this.state.firstName;
+    const email_address=this.state.email;
     const password=this.state.password;
     const url = "http://localhost:9000/users/register";
     let sendData = () => {
-    axios.post(url, {firstname,email,password})
+    axios.post(url, {username,email_address,password})
        .then(res => {
          console.log('Data send')
          this.props.history.push('/dashboard');

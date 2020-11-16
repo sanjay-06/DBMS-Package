@@ -6,9 +6,14 @@ var user=require('../models/usermodel');
 router.post('/',async(req,res)=> {
   console.log(req.body);
   let row = await user.findOne({where:{StudentId:req.body.username}});
+  let row1 = await user.findOne({where:{Student_Password:req.body.password}});
   if(!row)
 	{
-		console.log("Invalid username");
+		res.status(404).end();
+		return;
+  }
+  if(!row1)
+	{
 		res.status(404).end();
 		return;
   }

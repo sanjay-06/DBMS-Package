@@ -16,18 +16,18 @@ class Fees extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bigChartData: "data1"
+      bigChartData: "data",
     };
+    this.data={}
   }
-  setBgChartData = name => {
-    this.setState({
-      bigChartData: name
-    });
-  };
-  test(){
-    fetch('http://localhost:5000/users')
+  componentDidMount()
+  {
+    return fetch('http://localhost:9000/users/fees')
       .then(response => response.json())
-      .then(users => console.warn(users))
+      .then(users =>{
+      this.data=users;
+      console.log(this.data[0].CourseName);        
+      })
   }
   render() {
     return (
@@ -57,24 +57,21 @@ class Fees extends React.Component {
                   <Table className="tablesorter" responsive>
                     <thead className="text-primary">
                       <tr>
-                        <th>Name</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th className="text-center">Salary</th>
+                        <th>CourseName</th>
+                        <th>FeeHead</th>
+                        <th>Amount</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Dakota Rice</td>
+                        <td></td>
                         <td>Niger</td>
                         <td>Oud-Turnhout</td>
-                        <td className="text-center">$36,738</td>
                       </tr>
                       <tr>
                         <td>Minerva Hooper</td>
                         <td>Curaçao</td>
                         <td>Sinaai-Waas</td>
-                        <td className="text-center">$23,789</td>
                       </tr>
                       <tr>
                         <td>Sage Rodriguez</td>

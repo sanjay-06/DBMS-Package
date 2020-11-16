@@ -40,15 +40,21 @@ class App extends Component {
     axios.post(url, {username,password})
        .then(res => {
          console.log('Data send')
-         this.props.history.push('/dashboard');
+         this.props.history.push('/dashboard'); 
         })
-       .catch(err => console.log(err.data))
+       .catch(err=>{
+         if(err.response)
+         {
+          alert("Invalid username or password");
+          this.props.history.push('/login')
+         }
+       })
     }
     sendData();
-    }
+  }
     else
     {
-      alert("File the form properly");
+      alert("Fill the form properly");
     }
   };
   

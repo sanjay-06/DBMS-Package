@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var testAPIRouter=require("./routes/testAPI");
+var feerouter=require("./routes/feerouter");
 var users=require('./routes/users');
 var app = express();
 var bodyParser=require('body-parser');
@@ -25,8 +25,8 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use("/testAPI",testAPIRouter);
 app.use("/users/register",users);
+app.use("/users/fees",feerouter);
 //app.use("/users/fees",feestable);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

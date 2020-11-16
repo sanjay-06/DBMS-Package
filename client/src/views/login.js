@@ -2,10 +2,7 @@ import React, { Component} from "react";
 import "../App.css";
 import Button from '../components/elements/Button';
 import axios from "axios";
- 
-const emailRegex = RegExp(
-  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-);
+
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
   Object.values(formErrors).forEach(val => {
@@ -23,11 +20,9 @@ class App extends Component {
 
     this.state = {
       firstName: null,
-      email: null,
       password: null,
       formErrors: {
         firstName: "",
-        email: "",
         password: ""
       },
       apiResponse:""
@@ -39,11 +34,10 @@ class App extends Component {
     if(formValid(this.state))
     {
     const username=this.state.firstName;
-    const email_address=this.state.email;
     const password=this.state.password;
     const url = "http://localhost:9000/users/register";
     let sendData = () => {
-    axios.post(url, {username,email_address,password})
+    axios.post(url, {username,password})
        .then(res => {
          console.log('Data send')
          this.props.history.push('/dashboard');
@@ -66,16 +60,11 @@ class App extends Component {
     switch (name) {
       case "firstName":
         formErrors.firstName =
-          value.length < 3 ? "Invalid Username" : "";
-        break;
-      case "email":
-        formErrors.email = emailRegex.test(value)
-          ? ""
-          : "Invalid email address";
+          value.length < 3 ? "Invalid Rollnumber" : "";
         break;
       case "password":
         formErrors.password =
-          value.length < 6 ? "Invalid password" : "";
+          value.length < 4 ? "Invalid password" : "";
         break;
       default:
         break;
@@ -95,7 +84,7 @@ class App extends Component {
         <p>{this.state.apiResponse}</p>
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="firstName">
-              <label htmlFor="firstName">First Name</label>
+              <label htmlFor="firstName">Roll Number</label>
               <input
                 className={formErrors.firstName.length > 0 ? "error" : null}
                 placeholder=""
@@ -106,20 +95,6 @@ class App extends Component {
               />
               {formErrors.firstName.length > 0 && (
                 <span className="errorMessage">{formErrors.firstName}</span>
-              )}
-            </div>
-            <div className="email">
-              <label htmlFor="email">Email</label>
-              <input
-                className={formErrors.email.length > 0 ? "error" : null}
-                placeholder=""
-                type="email"
-                name="email"
-                noValidate
-                onChange={this.handleChange}
-              />
-              {formErrors.email.length > 0 && (
-                <span className="errorMessage">{formErrors.email}</span>
               )}
             </div>
             <div className="password">

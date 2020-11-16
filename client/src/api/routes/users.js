@@ -5,7 +5,7 @@ var user=require('../models/usermodel');
 /* GET users listing. */
 router.post('/',async(req,res)=> {
   console.log(req.body);
-  let row = await user.findOne({where:{username:req.body.username}});
+  let row = await user.findOne({where:{StudentId:req.body.username}});
   if(!row)
 	{
 		console.log("Invalid username");

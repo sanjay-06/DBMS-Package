@@ -1,27 +1,5 @@
-/*!
-
-=========================================================
-* Black Dashboard React v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-// nodejs library that concatenates classes
-// react plugin used to create charts
-import {Navbar,Nav} from "react-bootstrap";
-import "../black-dashboard-react-master/src/assets/scss/black-dashboard-react.scss";
-import "../black-dashboard-react-master/src/assets/css/nucleo-icons.css";
-// reactstrap components
+import {Navbar,Nav,NavDropdown} from "react-bootstrap";
 import {
   Card,
   CardHeader,
@@ -30,35 +8,50 @@ import {
   Table,
   Row,
   Col,
+  Button
 } from "reactstrap";
 
-class Marks extends React.Component {
+class Fees extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bigChartData: "data1"
+      bigChartData: "data",
     };
+    this.data={}
+    this.handleClick = this.handleClick.bind(this);
+  } 
+  handleClick() 
+    {
+      this.props.history.push("/")
+    }
+  componentDidMount()
+  { 
+    return fetch('http://localhost:9000/users/marks')
+      .then(response => response.json())
+      .then(users =>{
+      this.data=users;
+      console.log(this.data[0]);        
+      })
   }
-  setBgChartData = name => {
-    this.setState({
-      bigChartData: name
-    });
-  };
   render() {
     return (
       <>
        <Navbar bg="dark" variant="dark">
     <Nav className="mr-auto">
       <Nav.Link href="/dashboard">Home</Nav.Link>
-      <Nav.Link href="/attendance">Attendance details</Nav.Link>
+      <Nav.Link href="/attendance">Attendance Info</Nav.Link>
       <Nav.Link href="/payment">Fees</Nav.Link>
       <Nav.Link href="/ca">Interal Marks</Nav.Link>
-      <Nav.Link href="/library">Library</Nav.Link>
-      <Nav.Link href="/hostel">Hostel</Nav.Link>
+      <Nav.Link href="/hostel"></Nav.Link>
       <Nav.Link href="/timetable">Sem timetable</Nav.Link>
       <Nav.Link href="/results">Sem Results</Nav.Link>
-      <Nav.Link href="/hostel">Events</Nav.Link>
+      <NavDropdown title="Hostel" id="basic-nav-dropdown">
+        <NavDropdown.Item href="/hostelfee">Hostel Fees</NavDropdown.Item>
+        <NavDropdown.Item href="/hostelallot">Hostel Allotment</NavDropdown.Item>
+        <NavDropdown.Divider />
+      </NavDropdown>
     </Nav>
+    <Button color="dark" className="logout" onClick={this.handleClick} type="submit">Logout</Button>
   </Navbar>
   <br />
         <div className="content">
@@ -72,24 +65,21 @@ class Marks extends React.Component {
                   <Table className="tablesorter" responsive>
                     <thead className="text-primary">
                       <tr>
-                        <th>Name</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th className="text-center">Salary</th>
+                        <th>CourseName</th>
+                        <th>FeeHead</th>
+                        <th>Amount</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Dakota Rice</td>
+                        <td></td>
                         <td>Niger</td>
                         <td>Oud-Turnhout</td>
-                        <td className="text-center">$36,738</td>
                       </tr>
                       <tr>
                         <td>Minerva Hooper</td>
                         <td>Curaçao</td>
                         <td>Sinaai-Waas</td>
-                        <td className="text-center">$23,789</td>
                       </tr>
                       <tr>
                         <td>Sage Rodriguez</td>
@@ -133,4 +123,4 @@ class Marks extends React.Component {
   }
 }
 
-export default Marks;
+export default Fees;

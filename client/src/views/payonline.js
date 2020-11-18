@@ -1,27 +1,12 @@
-/*!
 
-=========================================================
-* Black Dashboard React v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 // nodejs library that concatenates classes
 // react plugin used to create charts
-import {Navbar,Nav} from "react-bootstrap";
+import {Navbar,Nav,NavDropdown} from "react-bootstrap";
 import "../black-dashboard-react-master/src/assets/scss/black-dashboard-react.scss";
 import "../black-dashboard-react-master/src/assets/css/nucleo-icons.css";
 // reactstrap components
+
 import {
   Card,
   CardHeader,
@@ -30,35 +15,49 @@ import {
   Table,
   Row,
   Col,
+  Button
 } from "reactstrap";
-
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       bigChartData: "data1"
     };
+    this.handleClick = this.handleClick.bind(this);
   }
   setBgChartData = name => {
     this.setState({
       bigChartData: name
     });
+    this.handleClick = this.handleClick.bind(this);
   };
+  handleClick() 
+    {
+      this.props.history.push("/login")
+    }
   render() {
     return (
       <>
-       <Navbar bg="dark" variant="dark">
+         <Navbar bg="dark" variant="dark">
     <Nav className="mr-auto">
       <Nav.Link href="/dashboard">Home</Nav.Link>
-      <Nav.Link href="/attendance">Attendance details</Nav.Link>
-      <Nav.Link href="/payment">Fees</Nav.Link>
+      <Nav.Link href="/attendance">Attendance Info</Nav.Link>
+      <NavDropdown title="Hostel" id="basic-nav-dropdown">
+        <NavDropdown.Item href="/hostelfee">Fees details</NavDropdown.Item>
+        <NavDropdown.Item href="/hostelallot">Pay online</NavDropdown.Item>
+        <NavDropdown.Divider />
+      </NavDropdown>
       <Nav.Link href="/ca">Interal Marks</Nav.Link>
-      <Nav.Link href="/library">Library</Nav.Link>
-      <Nav.Link href="/hostel">Hostel</Nav.Link>
+      <Nav.Link href="/hostel"></Nav.Link>
       <Nav.Link href="/timetable">Sem timetable</Nav.Link>
       <Nav.Link href="/results">Sem Results</Nav.Link>
-      <Nav.Link href="/hostel">Events</Nav.Link>
+      <NavDropdown title="Hostel" id="basic-nav-dropdown">
+        <NavDropdown.Item href="/hostelfee">Hostel Fees</NavDropdown.Item>
+        <NavDropdown.Item href="/hostelallot">Hostel Allotment</NavDropdown.Item>
+        <NavDropdown.Divider />
+      </NavDropdown>
     </Nav>
+    <Button color="dark" className="logout" onClick={this.handleClick} type="submit">Logout</Button>
   </Navbar>
   <br />
         <div className="content">

@@ -18,7 +18,9 @@
     "react-dom": "^16.14.0",
     "react-fontawesome": "^1.7.1",
     "react-ga": "^2.7.0",
+    "react-hook-form": "^6.11.1",
     "react-modal": "^3.11.2",
+    "react-payment-form": "^1.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "reactstrap": "^8.7.1"

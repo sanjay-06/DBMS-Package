@@ -18,18 +18,25 @@ class Fees extends React.Component {
     super(props);
     this.state = {
       bigChartData: "data",
+      users:[]
     };
     this.data={};
     this.handleClick=this.handleClick.bind(this);
   }
-  componentDidMount()
-  {
-    return fetch('http://localhost:9000/users/hostelallot')
-      .then(response => response.json())
-      .then(users =>{
-      this.data=users;
-      console.log(this.data[0]);        
-      })
+  componentDidMount() {
+    let self = this;
+    fetch('http://localhost:9000/users/hostelallot', {
+        method: 'GET'
+    }).then(function(response) {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json();
+    }).then(function(data) {
+        self.setState({users: data});
+    }).catch(err => {
+    console.log('caught it!',err);
+    })
   }
   handleClick() 
   {
@@ -61,58 +68,25 @@ class Fees extends React.Component {
             <Col>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Simple Table</CardTitle>
+                  <CardTitle tag="h4">Hostel Allotment</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <Table className="tablesorter" responsive>
+                  <Table className="tablesorter">
                     <thead className="text-primary">
                       <tr>
-                        <th>CourseName</th>
-                        <th>FeeHead</th>
-                        <th>Amount</th>
+                        <th>StudentId</th>
+                        <th>Block</th>
+                        <th>RoomNo</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td></td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
-                      </tr>
-                      <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td className="text-center">$56,142</td>
-                      </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td className="text-center">$38,735</td>
-                      </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td className="text-center">$63,542</td>
-                      </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$78,615</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$98,615</td>
-                      </tr>
+                    {this.state.users.map(member =>
+                        <tr key={member.id}>
+                        <td>{member.StudentId} </td>
+                        <td>{member.Block}</td>
+                        <td>{member.RoomNo}</td>
+                        </tr>
+                    )}
                     </tbody>
                   </Table>
                 </CardBody>

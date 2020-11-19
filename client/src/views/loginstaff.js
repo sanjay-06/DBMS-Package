@@ -35,18 +35,18 @@ class App extends Component {
     {
     const username=this.state.firstName;
     const password=this.state.password;
-    const url = "http://localhost:9000/users/register";
+    const url = "http://localhost:9000/users/staffs";
     let sendData = () => {
     axios.post(url, {username,password})
        .then(res => {
          console.log('Data send')
-         this.props.history.push('/dashboard'); 
+         this.props.history.push('/upload'); 
         })
        .catch(err=>{
          if(err.response)
          {
           alert("Invalid username or password");
-          this.props.history.push('/login')
+          this.props.history.push('/login1')
          }
        })
     }
@@ -64,9 +64,9 @@ class App extends Component {
     let formErrors = { ...this.state.formErrors };
 
     switch (name) {
-      case "firstName":
+      case "firstName1":
         formErrors.firstName =
-          value.length < 3 ? "Invalid Rollnumber" : "";
+          value.length < 3 ? "Invalid username" : "";
         break;
       case "password":
         formErrors.password =
@@ -90,7 +90,7 @@ class App extends Component {
         <p>{this.state.apiResponse}</p>
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="firstName">
-              <label htmlFor="firstName">Roll Number</label>
+              <label htmlFor="firstName">Username</label>
               <input
                 className={formErrors.firstName.length > 0 ? "error" : null}
                 placeholder=""

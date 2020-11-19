@@ -16,18 +16,24 @@ class Semtimetable extends React.Component {
     super(props);
     this.state = {
       bigChartData: "data",
+      users:[]
     };
-    this.data={};
     this.handleClick=this.handleClick.bind(this);
   }
-  componentDidMount()
-  {
-    return fetch('http://localhost:9000/users/semtimetable')
-      .then(response => response.json())
-      .then(users =>{
-      this.data=users;
-      console.log(this.data);        
-      })
+  componentDidMount() {
+    let self = this;
+    fetch('http://localhost:9000/users/semtimetable', {
+        method: 'GET'
+    }).then(function(response) {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json();
+    }).then(function(data) {
+        self.setState({users: data});
+    }).catch(err => {
+    console.log('caught it!',err);
+    })
   }
   handleClick() 
   {
@@ -41,7 +47,7 @@ class Semtimetable extends React.Component {
       <Nav.Link href="/dashboard">Home</Nav.Link>
       <Nav.Link href="/attendance">Attendance Info</Nav.Link>
       <Nav.Link href="/payment">Fees</Nav.Link>
-      <Nav.Link href="/ca">Interal Marks</Nav.Link>
+      <Nav.Link href="/ca">Internal Marks</Nav.Link>
       <Nav.Link href="/hostel"></Nav.Link>
       <Nav.Link href="/timetable">Sem timetable</Nav.Link>
       <Nav.Link href="/results">Sem Results</Nav.Link>
@@ -59,57 +65,57 @@ class Semtimetable extends React.Component {
             <Col>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Simple Table</CardTitle>
+                  <CardTitle tag="h4">Semester Timetable</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <Table className="tablesorter" responsive>
+                  <Table className="tablesorter">
                     <thead className="text-primary">
                       <tr>
-                        <th>CourseName</th>
-                        <th>FeeHead</th>
-                        <th>Amount</th>
+                        <th>SubjectId</th>
+                        <th>SubjectName</th>
+                        <th>Date</th>
+                        <th>Slot</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.users.map(member =>
+                        <tr key={member.id}>
+                        <td>{member.SubjectId} </td>
+                        <td>{member.SubjectName}</td>
+                        <td>{member.Date}</td>
+                        <td>{member.Slot}</td>
+                        </tr>
+                    )}
+                    </tbody>
+                  </Table>
+                </CardBody>
+              </Card>
+            </Col>        
+          </Row>
+        </div>
+        <div className="content">
+        <Row>
+            <Col>
+              <Card>
+                <CardHeader>
+                  <CardTitle tag="h4">Legend</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <Table className="tablesorter">
+                    <thead className="text-primary">
+                      <tr>
+                        <th>Timings</th>
+                        <th>Slot</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td></td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
+                        <td>9:30 AM TO 11:30 AM</td>
+                        <td>1</td>
                       </tr>
                       <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td className="text-center">$56,142</td>
-                      </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td className="text-center">$38,735</td>
-                      </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td className="text-center">$63,542</td>
-                      </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$78,615</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$98,615</td>
+                        <td>1:30 PM TO 3:30 PM</td>
+                        <td>2</td>
                       </tr>
                     </tbody>
                   </Table>

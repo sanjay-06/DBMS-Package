@@ -5,6 +5,7 @@ var marks=require('../models/markmodel');
 const hostelfee = require('../models/hostelfeemodel');
 const hostelallot = require('../models/hostelallot');
 const semtimetable = require('../models/semtimetablemodel');
+const staffUser =require('../models/staffmodel');
 
 function init()
 {
@@ -15,6 +16,7 @@ function init()
     await hostelfee.sync();
     await hostelallot.sync();
     await semtimetable.sync();
+    await staffUser.sync();
 }
 
 init();

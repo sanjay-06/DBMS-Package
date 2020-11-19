@@ -60,7 +60,7 @@ const Hero = ({
                   <Button tag="a" color="primary" wideMobile href="/login">
                     Login for students
                     </Button>
-                  <Button tag="a" color="dark" wideMobile href="/login">
+                  <Button tag="a" color="dark" wideMobile href="/login1">
                     Login for staffs
                     </Button>
                 </ButtonGroup>

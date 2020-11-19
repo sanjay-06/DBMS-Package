@@ -16,6 +16,7 @@ class Fees extends React.Component {
     super(props);
     this.state = {
       bigChartData: "data",
+      users:[]
     };
     this.data={}
     this.handleClick = this.handleClick.bind(this);
@@ -24,15 +25,21 @@ class Fees extends React.Component {
     {
       this.props.history.push("/")
     }
-  componentDidMount()
-  { 
-    return fetch('http://localhost:9000/users/marks')
-      .then(response => response.json())
-      .then(users =>{
-      this.data=users;
-      console.log(this.data[0]);        
+    componentDidMount() {
+      let self = this;
+      fetch('http://localhost:9000/users/marks', {
+          method: 'GET'
+      }).then(function(response) {
+          if (response.status >= 400) {
+              throw new Error("Bad response from server");
+          }
+          return response.json();
+      }).then(function(data) {
+          self.setState({users: data});
+      }).catch(err => {
+      console.log('caught it!',err);
       })
-  }
+    }
   render() {
     return (
       <>
@@ -59,58 +66,39 @@ class Fees extends React.Component {
             <Col>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Simple Table</CardTitle>
+                  <CardTitle tag="h4">Internal Marks</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <Table className="tablesorter" responsive>
+                  <Table className="tablesorter">
                     <thead className="text-primary">
                       <tr>
-                        <th>CourseName</th>
-                        <th>FeeHead</th>
-                        <th>Amount</th>
+                        <th>StudentId</th>
+                        <th>SubjectId</th>
+                        <th>CA1 Mark</th>
+                        <th>CA2 Mark</th>
+                        <th>Assignment Mark</th>
+                        <th>Tutorial Mark</th>
+                        <th>Lab1 Mark</th>
+                        <th>Lab2 Mark</th>
+                        <th>LabFinal Mark</th>
+                        <th>Package Mark</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td></td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
-                      </tr>
-                      <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td className="text-center">$56,142</td>
-                      </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td className="text-center">$38,735</td>
-                      </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td className="text-center">$63,542</td>
-                      </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$78,615</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$98,615</td>
-                      </tr>
+                    {this.state.users.map(member =>
+                        <tr key={member.id}>
+                        <td>{member.StudentId} </td>
+                        <td>{member.SubjectId}</td>
+                        <td>{member.CA1_Mark} </td>
+                        <td>{member.CA2_Mark}</td>
+                        <td>{member.Assignment_Mark} </td>
+                        <td>{member.Tutorial_Mark}</td>
+                        <td>{member.Lab1_Mark} </td>
+                        <td>{member.Lab2_Mark}</td>
+                        <td>{member.LabFinal_Mark} </td>
+                        <td>{member.Package_Mark}</td>
+                        </tr>
+                    )}
                     </tbody>
                   </Table>
                 </CardBody>

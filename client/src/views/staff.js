@@ -1,7 +1,5 @@
 import React from "react";
 import {Navbar,Nav,NavDropdown} from "react-bootstrap";
-import "../black-dashboard-react-master/src/assets/scss/black-dashboard-react.scss";
-import "../black-dashboard-react-master/src/assets/css/nucleo-icons.css";
 import {
   Card,
   CardHeader,
@@ -18,46 +16,39 @@ class Fees extends React.Component {
     super(props);
     this.state = {
       bigChartData: "data",
-      users: []
+      users:[]
     };
-    this.handleClick=this.handleClick.bind(this);
-    this.setActiveTutorial = this.setActiveTutorial.bind(this);
-  }
-  setActiveTutorial(tutorial, index) {
-    this.setState({
-      currentTutorial: tutorial,
-      currentIndex: index
-    });
-  }
+    this.data={}
+    this.handleClick = this.handleClick.bind(this);
+  } 
   handleClick() 
-  {
-    this.props.history.push("/")
-  }
-  componentDidMount() {
-    let self = this;
-    fetch('http://localhost:9000/users/hostelfees', {
-        method: 'GET'
-    }).then(function(response) {
-        if (response.status >= 400) {
-            throw new Error("Bad response from server");
-        }
-        return response.json();
-    }).then(function(data) {
-        self.setState({users: data});
-    }).catch(err => {
-    console.log('caught it!',err);
-    })
-  }
+    {
+      this.props.history.push("/")
+    }
+    componentDidMount() {
+      let self = this;
+      fetch('http://localhost:9000/users/marks', {
+          method: 'GET'
+      }).then(function(response) {
+          if (response.status >= 400) {
+              throw new Error("Bad response from server");
+          }
+          return response.json();
+      }).then(function(data) {
+          self.setState({users: data});
+      }).catch(err => {
+      console.log('caught it!',err);
+      })
+    }
   render() {
-    const {data} = this.state;
     return (
       <>
-     <Navbar bg="dark" variant="dark">
+       <Navbar bg="dark" variant="dark">
     <Nav className="mr-auto">
       <Nav.Link href="/dashboard">Home</Nav.Link>
       <Nav.Link href="/attendance">Attendance Info</Nav.Link>
       <Nav.Link href="/payment">Fees</Nav.Link>
-      <Nav.Link href="/ca">Interal Marks</Nav.Link>
+      <Nav.Link href="/ca">Internal Marks</Nav.Link>
       <Nav.Link href="/hostel"></Nav.Link>
       <Nav.Link href="/timetable">Sem timetable</Nav.Link>
       <Nav.Link href="/results">Sem Results</Nav.Link>
@@ -69,27 +60,44 @@ class Fees extends React.Component {
     </Nav>
     <Button color="dark" className="logout" onClick={this.handleClick} type="submit">Logout</Button>
   </Navbar>
-  <br /><br></br><br></br>
+  <br />
         <div className="content">
         <Row>
             <Col>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Hostel Fees</CardTitle>
+                  <CardTitle tag="h4">Internal Marks</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table className="tablesorter">
                     <thead className="text-primary">
                       <tr>
-                        <th>Head</th>
-                        <th>Amount</th>
+                        <th>StudentId</th>
+                        <th>SubjectId</th>
+                        <th>CA1 Mark</th>
+                        <th>CA2 Mark</th>
+                        <th>Assignment Mark</th>
+                        <th>Tutorial Mark</th>
+                        <th>Lab1 Mark</th>
+                        <th>Lab2 Mark</th>
+                        <th>LabFinal Mark</th>
+                        <th>Package Mark</th>
                       </tr>
                     </thead>
                     <tbody>
                     {this.state.users.map(member =>
                         <tr key={member.id}>
-                        <td>{member.Head} </td>
-                        <td>{member.Amount}</td>
+                        <td>{member.StudentId} </td>
+                        <td>{member.SubjectId}</td>
+                        <td>{member.CA1_Mark} </td>
+                        <td>{member.CA2_Mark}</td>
+                        <td>{member.Assignment_Mark} </td>
+                        <td>{member.Tutorial_Mark}</td>
+                        <td>{member.Lab1_Mark} </td>
+                        <td>{member.Lab2_Mark}</td>
+                        <td>{member.LabFinal_Mark} </td>
+                        <td>{member.Package_Mark}</td>
+                        <td><a>Edit</a>|<a>Delete</a></td>
                         </tr>
                     )}
                     </tbody>

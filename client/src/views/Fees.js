@@ -16,23 +16,43 @@ class Fees extends React.Component {
     super(props);
     this.state = {
       bigChartData: "data",
+      users:[],
+      users1:[]
     };
-    this.data={}
     this.handleClick = this.handleClick.bind(this);
   } 
   handleClick() 
     {
       this.props.history.push("/")
     }
-  componentDidMount()
-  { 
-    return fetch('http://localhost:9000/users/fees')
-      .then(response => response.json())
-      .then(users =>{
-      this.data=users;
-      console.log(this.data[0].CourseName);        
+    componentDidMount() {
+      let self = this;
+      fetch('http://localhost:9000/users/fees', {
+          method: 'GET'
+      }).then(function(response) {
+          if (response.status >= 400) {
+              throw new Error("Bad response from server");
+          }
+          return response.json();
+      }).then(function(data) {
+          self.setState({users: data});
+      }).catch(err => {
+      console.log('caught it!',err);
       })
-  }
+      let self1 = this;
+      fetch('http://localhost:9000/users/feesstatus', {
+          method: 'GET'
+      }).then(function(response) {
+          if (response.status >= 400) {
+              throw new Error("Bad response from server");
+          }
+          return response.json();
+      }).then(function(data) {
+          self1.setState({users1: data});
+      }).catch(err => {
+      console.log('caught it!',err);
+      })
+    }
   render() {
     return (
       <>
@@ -59,58 +79,58 @@ class Fees extends React.Component {
             <Col>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Simple Table</CardTitle>
+                  <CardTitle tag="h4">Fee Structure</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <Table className="tablesorter" responsive>
+                  <Table className="tablesorter">
                     <thead className="text-primary">
                       <tr>
                         <th>CourseName</th>
                         <th>FeeHead</th>
-                        <th>Amount</th>
+                        <th>Amount(INR)</th>
                       </tr>
                     </thead>
                     <tbody>
+                    {this.state.users.map(member =>
+                        <tr key={member.id}>
+                        <td>{member.CourseName} </td>
+                        <td>{member.FeeHead}</td>
+                        <td><span className="WebRupee">&#x20B9; </span>{member.CAmount}</td>
+                        </tr>
+                    )}
+                    </tbody>
+                  </Table>
+                </CardBody>
+              </Card>
+            </Col>        
+          </Row>
+        </div>
+        <div className="content">
+        <Row>
+            <Col>
+              <Card>
+                <CardHeader>
+                  <CardTitle tag="h4">Payment status</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <Table className="tablesorter">
+                    <thead className="text-primary">
                       <tr>
-                        <td></td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
+                        <th>CourseName</th>
+                        <th>FeeHead</th>
+                        <th>Amount(INR)</th>
+                        <th>Payment Status</th>
                       </tr>
-                      <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td className="text-center">$56,142</td>
-                      </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td className="text-center">$38,735</td>
-                      </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td className="text-center">$63,542</td>
-                      </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$78,615</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$98,615</td>
-                      </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.users.map(member =>
+                        <tr key={member.id}>
+                        <td>Msc Software Systems</td>
+                        <td>{member.FeeHead}</td>
+                        <td><span className="WebRupee">&#x20B9; </span>74405</td>
+                        <td>{member.FeeHead}</td>
+                        </tr>
+                    )}
                     </tbody>
                   </Table>
                 </CardBody>

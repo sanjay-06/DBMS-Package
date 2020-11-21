@@ -4,8 +4,7 @@ import classNames from "classnames";
 // react plugin used to create charts
 import {Navbar,Nav,NavDropdown} from "react-bootstrap";
 import {Line,Bar} from "react-chartjs-2"
-
-
+import Cookies from 'js-cookie'
 // reactstrap components
 import {
   Button,
@@ -14,7 +13,6 @@ import {
   CardHeader,
   CardBody,
   CardTitle,
-  Table,
   Row,
   Col,
 
@@ -27,6 +25,7 @@ import {
   chartExample3,
   chartExample4
 } from "../utils/variables1/chart";
+import auth from "../Auth";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -34,18 +33,14 @@ class Dashboard extends React.Component {
     this.state = {
       bigChartData: "data1"
     };
-    this.handleClick = this.handleClick.bind(this);
   }
-  handleClick() 
-    {
-      this.props.history.push("/")
-    }
   setBgChartData = name => {
     this.setState({
       bigChartData: name
     });
   };
   render() {
+    const value=Cookies.get('name');
     return (
       <>
       <Navbar bg="dark" variant="dark">
@@ -53,8 +48,7 @@ class Dashboard extends React.Component {
       <Nav.Link href="/dashboard">Home</Nav.Link>
       <Nav.Link href="/attendance">Attendance Info</Nav.Link>
       <Nav.Link href="/payment">Fees</Nav.Link>
-      <Nav.Link href="/ca">Interal Marks</Nav.Link>
-      <Nav.Link href="/hostel"></Nav.Link>
+      <Nav.Link href="/ca">Internal Marks</Nav.Link>
       <Nav.Link href="/timetable">Sem timetable</Nav.Link>
       <Nav.Link href="/results">Sem Results</Nav.Link>
       <NavDropdown title="Hostel" id="basic-nav-dropdown">
@@ -63,7 +57,12 @@ class Dashboard extends React.Component {
         <NavDropdown.Divider />
       </NavDropdown>
     </Nav>
-    <Button color="dark" className="logout" onClick={this.handleClick} type="submit">Logout</Button>
+    <Button color="dark" className="logout" onClick={()=>{
+      auth.logout(()=>{
+        Cookies.remove('name');
+        this.props.history.push("/");
+      })
+    }}>Logout</Button>
   </Navbar>
   <br />
         <div className="content">
@@ -73,8 +72,8 @@ class Dashboard extends React.Component {
                 <CardHeader>
                   <Row>
                     <Col className="text-left" sm="6">
-                      <h5 className="card-category">Dashboard</h5>
-                      <CardTitle tag="h2">Student attendance</CardTitle>
+                      <h3 className="card-category">Welcome {value} to your Dashboard</h3>
+                      <CardTitle tag="h5">Student attendance</CardTitle>
                     </Col>
                     <Col sm="6">
                       <ButtonGroup

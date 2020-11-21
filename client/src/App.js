@@ -18,7 +18,11 @@ import result from './views/semresult';
 import hostelfee from './views/hostelfee';
 import hostelallot from './views/hostel';
 import staff from './views/staff'
+import { ProtectedRoute } from './utils/Authenticated';
+import {ProtectedRoute1} from './utils/AuthenticatedComponent'
+
 // Initialize Google Analytics
+
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
 
 const trackPage = page => {
@@ -46,16 +50,16 @@ const App = () => {
         <Switch>
           <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
           <AppRoute exact path="/login" component={login}/>
-          <AppRoute exact path="/dashboard" component={dashboard}/>
-          <AppRoute exact path="/attendance" component={Attendance}/>
-          <AppRoute exact path="/payment" component={Fees}/>
-          <AppRoute exact path="/ca" component={Marks}/>
-          <AppRoute exact path="/hostelallot" component={hostelallot}/>
-          <AppRoute exact path="/timetable" component={timetable}/>
-          <AppRoute exact path="/results" component={result}/>
-          <AppRoute exact path="/hostelfee" component={hostelfee}/>
+          <ProtectedRoute exact path="/dashboard" component={dashboard}/>
+          <ProtectedRoute  exact path="/attendance" component={Attendance}/>
+          <ProtectedRoute exact path="/payment" component={Fees}/>
+          <ProtectedRoute exact path="/ca" component={Marks}/>
+          <ProtectedRoute exact path="/hostelallot" component={hostelallot}/>
+          <ProtectedRoute exact path="/timetable" component={timetable}/>
+          <ProtectedRoute exact path="/results" component={result}/>
+          <ProtectedRoute exact path="/hostelfee" component={hostelfee}/>
           <AppRoute exact path="/login1" component={loginstaff}/>
-          <AppRoute exact path="/upload" component={staff}/>
+          <ProtectedRoute1 exact path="/upload" component={staff}/>
         </Switch>
       )} />
   );

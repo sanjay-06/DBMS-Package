@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
+const bodyParser = require('body-parser')
 var user=require('../models/usermodel');
-
+const app = require('../app');
+router.use(bodyParser.json());
 /* GET users listing. */
 router.post('/',async(req,res)=> {
   console.log(req.body);
@@ -16,8 +18,8 @@ router.post('/',async(req,res)=> {
 	{
 		res.status(404).end();
 		return;
-  }
+  } 
+  console.log(row.StudentId);
   res.status(200).end();
-  console.log(row);
 });
 module.exports = router;

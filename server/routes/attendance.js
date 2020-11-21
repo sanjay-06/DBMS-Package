@@ -5,8 +5,8 @@ const attendance = require('../models/attendancemodel');
 
 router.use(bodyParser.json());
 /* GET users listing. */
-router.get('/',async(req,res)=> {
-  let row = await attendance.findAll();
+router.get('/:id',async(req,res)=> {
+  let row = await attendance.findAll({where:{StudentId:req.params.id}});
   console.log(row);
   res.json(row);
 });

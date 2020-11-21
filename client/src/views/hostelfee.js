@@ -2,6 +2,8 @@ import React from "react";
 import {Navbar,Nav,NavDropdown} from "react-bootstrap";
 import "../black-dashboard-react-master/src/assets/scss/black-dashboard-react.scss";
 import "../black-dashboard-react-master/src/assets/css/nucleo-icons.css";
+import Cookies from 'js-cookie';
+import auth from '../Auth'
 import {
   Card,
   CardHeader,
@@ -57,8 +59,7 @@ class Fees extends React.Component {
       <Nav.Link href="/dashboard">Home</Nav.Link>
       <Nav.Link href="/attendance">Attendance Info</Nav.Link>
       <Nav.Link href="/payment">Fees</Nav.Link>
-      <Nav.Link href="/ca">Interal Marks</Nav.Link>
-      <Nav.Link href="/hostel"></Nav.Link>
+      <Nav.Link href="/ca">Internal Marks</Nav.Link>
       <Nav.Link href="/timetable">Sem timetable</Nav.Link>
       <Nav.Link href="/results">Sem Results</Nav.Link>
       <NavDropdown title="Hostel" id="basic-nav-dropdown">
@@ -67,7 +68,12 @@ class Fees extends React.Component {
         <NavDropdown.Divider />
       </NavDropdown>
     </Nav>
-    <Button color="dark" className="logout" onClick={this.handleClick} type="submit">Logout</Button>
+    <Button color="dark" className="logout" onClick={()=>{
+      auth.logout(()=>{
+        Cookies.remove('name');
+        this.props.history.push("/");
+      })
+    }}>Logout</Button>
   </Navbar>
   <br /><br></br><br></br>
         <div className="content">

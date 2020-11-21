@@ -1,8 +1,9 @@
-import React, { Component} from "react";
 import "../App.css";
+import React,{Component} from 'react'
 import Button from '../components/elements/Button';
+import Particles from 'react-particles-js';
 import axios from "axios";
-
+import auth from '../Auth'
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
   Object.values(formErrors).forEach(val => {
@@ -40,7 +41,9 @@ class App extends Component {
     axios.post(url, {username,password})
        .then(res => {
          console.log('Data send')
-         this.props.history.push('/upload'); 
+         auth.login(()=>{
+          this.props.history.push('/upload'); 
+         })
         })
        .catch(err=>{
          if(err.response)
@@ -85,6 +88,82 @@ class App extends Component {
     return (
 
       <div className="wrapper">
+        <div className="background">
+            <Particles 
+            params={{ 
+              "particles":
+              {
+                "number":
+                {
+                  "value": 60,
+                  "density": 
+                  {
+                    "enable": true,
+                    "value_area": 1000
+                  }
+                },
+                "color":
+                {
+                  "value": "#00bfff"
+                },
+                "shape":
+                {
+                  "type": "polygon",
+                  "stroke":
+                  {
+                    "width":5,
+                    "color": "#fff"
+                  },
+                  "polygon": 
+                  {
+                    "nb_sides": 1
+                  }
+                },
+                "opacity":
+                {
+                  "value": 0.5,
+                  "random": true
+                },
+                "size":
+                {
+                  "value": 1
+                }
+              },
+              "interactivity":
+              {
+                "events":
+                {
+                  "onhover":
+                  {
+                    "enable":true,
+                    "mode": "repulse"
+                  },
+                  "onclick":
+                  {
+                    "enable":true,
+                    "mode": "push"
+                  }
+                },
+                "modes":
+                {
+                  "repulse":
+                  {
+                    "distance": 50,
+                    "duration": 0.5
+                  },
+                  "grab":
+                  {
+                    "distance": 100,
+                    "line_linked": 
+                    {
+                      "opacity": 1
+                    }
+                  }
+                }
+              }
+          }} 
+        /> 
+        </div>
         <div className="form-wrapper">
 
         <p>{this.state.apiResponse}</p>

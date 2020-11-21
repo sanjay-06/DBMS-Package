@@ -1,5 +1,7 @@
 import React from "react";
 import {Navbar,Nav,NavDropdown} from "react-bootstrap";
+import Cookies from 'js-cookie';
+import auth from '../Auth'
 import {
   Card,
   CardHeader,
@@ -56,13 +58,12 @@ class Fees extends React.Component {
   render() {
     return (
       <>
-       <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark">
     <Nav className="mr-auto">
       <Nav.Link href="/dashboard">Home</Nav.Link>
       <Nav.Link href="/attendance">Attendance Info</Nav.Link>
       <Nav.Link href="/payment">Fees</Nav.Link>
-      <Nav.Link href="/ca">Interal Marks</Nav.Link>
-      <Nav.Link href="/hostel"></Nav.Link>
+      <Nav.Link href="/ca">Internal Marks</Nav.Link>
       <Nav.Link href="/timetable">Sem timetable</Nav.Link>
       <Nav.Link href="/results">Sem Results</Nav.Link>
       <NavDropdown title="Hostel" id="basic-nav-dropdown">
@@ -71,7 +72,12 @@ class Fees extends React.Component {
         <NavDropdown.Divider />
       </NavDropdown>
     </Nav>
-    <Button color="dark" className="logout" onClick={this.handleClick} type="submit">Logout</Button>
+    <Button color="dark" className="logout" onClick={()=>{
+      auth.logout(()=>{
+        Cookies.remove('name');
+        this.props.history.push("/");
+      })
+    }}>Logout</Button>
   </Navbar>
   <br />
         <div className="content">

@@ -1,5 +1,7 @@
 import React from "react";
+import Cookies from 'js-cookie'
 import {Navbar,Nav,NavDropdown} from "react-bootstrap";
+import auth from '../Auth'
 import {
   Card,
   CardHeader,
@@ -27,7 +29,8 @@ class Fees extends React.Component {
     }
     componentDidMount() {
       let self = this;
-      fetch('http://localhost:9000/users/marks', {
+      const username=Cookies.get('name');
+      fetch('http://localhost:9000/users/marks/'+username, {
           method: 'GET'
       }).then(function(response) {
           if (response.status >= 400) {
@@ -58,7 +61,12 @@ class Fees extends React.Component {
         <NavDropdown.Divider />
       </NavDropdown>
     </Nav>
-    <Button color="dark" className="logout" onClick={this.handleClick} type="submit">Logout</Button>
+    <Button color="dark" className="logout" onClick={()=>{
+      auth.logout(()=>{
+        Cookies.remove('name');
+        this.props.history.push("/");
+      })
+    }}>Logout</Button>
   </Navbar>
   <br />
         <div className="content">

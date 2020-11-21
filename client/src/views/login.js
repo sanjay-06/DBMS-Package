@@ -62,6 +62,11 @@ class App extends Component {
       alert("Fill the form properly");
     }
   };
+
+  handle = e =>{
+    e.preventDefault();
+    this.props.history.push('/');
+  }
   
   handleChange = e => {
     e.preventDefault();
@@ -202,7 +207,7 @@ class App extends Component {
               <br></br>
             </div>
           </form>
-        </div>
+         </div>
       </div>
     );
   }

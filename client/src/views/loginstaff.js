@@ -4,6 +4,7 @@ import Button from '../components/elements/Button';
 import Particles from 'react-particles-js';
 import axios from "axios";
 import auth from '../Auth'
+import Cookies from "js-cookie"
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
   Object.values(formErrors).forEach(val => {
@@ -32,6 +33,7 @@ class App extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     if(formValid(this.state))
     {
     const username=this.state.firstName;
@@ -41,6 +43,7 @@ class App extends Component {
     axios.post(url, {username,password})
        .then(res => {
          console.log('Data send')
+         Cookies.set('staffname',username);
          auth.login(()=>{
           this.props.history.push('/upload'); 
          })

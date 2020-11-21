@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 let sequelize = require('../connection/dbconnection');
-const marks = sequelize.define('marks', {
+const marks = sequelize.define('tmarks', {
     StudentId:
     {
         type: DataTypes.STRING,
@@ -32,32 +32,11 @@ const marks = sequelize.define('marks', {
 {
     type: DataTypes.STRING,
     allowNull: false
-},
-Lab1_Mark:
-  {
-      type: DataTypes.STRING,
-      allowNull: false,
-      primaryKey: true
-  },
-  Lab2_Mark  :
-  {
-      type: DataTypes.STRING,
-      allowNull: false
-  },
-  LabFinal_Mark  :
-{
-    type: DataTypes.STRING,
-    allowNull: false
-},
- Package_Mark :
-{
-    type: DataTypes.STRING,
-    allowNull: false
-},
+}
 },{
       timestamps: false
 }, {
-    tableName: 'marks'
+    tableName: 'tmarks'
   },
    {
     freezeTableName: true

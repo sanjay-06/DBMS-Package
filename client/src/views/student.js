@@ -1,6 +1,6 @@
 import React from "react";
-import Cookies from 'js-cookie'
 import {Navbar,Nav,NavDropdown} from "react-bootstrap";
+import Cookies from 'js-cookie';
 import auth from '../Auth'
 import {
   Card,
@@ -18,10 +18,8 @@ class Fees extends React.Component {
     super(props);
     this.state = {
       bigChartData: "data",
-      users:[],
-      users1:[]
+      users:[]
     };
-    this.data={}
     this.handleClick = this.handleClick.bind(this);
   } 
   handleClick() 
@@ -30,8 +28,7 @@ class Fees extends React.Component {
     }
     componentDidMount() {
       let self = this;
-      const username=Cookies.get('name');
-      fetch('http://localhost:9000/users/semmarks/'+username, {
+      fetch('http://localhost:9000/admin/students', {
           method: 'GET'
       }).then(function(response) {
           if (response.status >= 400) {
@@ -47,20 +44,10 @@ class Fees extends React.Component {
   render() {
     return (
       <>
-       <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark">
     <Nav className="mr-auto">
-      <Nav.Link href="/dashboard">Home</Nav.Link>
-      <Nav.Link href="/attendance">Attendance Info</Nav.Link>
-      <Nav.Link href="/payment">Fees</Nav.Link>
-      <Nav.Link href="/ca">Interal Marks</Nav.Link>
-      <Nav.Link href="/hostel"></Nav.Link>
-      <Nav.Link href="/timetable">Sem timetable</Nav.Link>
-      <Nav.Link href="/results">Sem Results</Nav.Link>
-      <NavDropdown title="Hostel" id="basic-nav-dropdown">
-        <NavDropdown.Item href="/hostelfee">Hostel Fees</NavDropdown.Item>
-        <NavDropdown.Item href="/hostelallot">Hostel Allotment</NavDropdown.Item>
-        <NavDropdown.Divider />
-      </NavDropdown>
+      <Nav.Link href="/upload">Home</Nav.Link>
+      <Nav.Link href="/students">students details</Nav.Link>
     </Nav>
     <Button color="dark" className="logout" onClick={()=>{
       auth.logout(()=>{
@@ -71,33 +58,51 @@ class Fees extends React.Component {
   </Navbar>
   <br />
         <div className="content">
-          <Row>
+        <Row>
             <Col>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Sem Exam Marks</CardTitle>
+                  <CardTitle tag="h4">Student details</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table className="tablesorter">
                     <thead className="text-primary">
                       <tr>
+                        <th>FirstName</th>
+                        <th>LastName</th>
                         <th>StudentId</th>
-                        <th>SubjectId</th>
-                        <th>SubjectName</th>
-                        <th>Credit</th>
-                        <th>Grade</th>
-                        <th>Result</th>
+                        <th>DateOfBirth</th>
+                        <th>Batch</th>
+                        <th>CourseName</th>
+                        <th>DeptName</th>
+                        <th>Email</th>
+                        <th>StudentMobileNo</th>
+                        <th>ResidentStatus</th>
+                        <th>FatherName</th>
+                        <th>ParentMobileNo</th>
+                        <th>District</th>
+                        <th>State</th>
+                        <th>Country</th>
                       </tr>
                     </thead>
                     <tbody>
                     {this.state.users.map(member =>
                         <tr key={member.id}>
-                        <td>{member.StudentId} </td>
-                        <td>{member.SubjectId}</td>
-                        <td>{member.SubjectName} </td>
-                        <td>{member.Credit}</td>
-                        <td>{member.Grade} </td>
-                        <td>{member.Result}</td>
+                        <td>{member.FirstName}</td>
+                        <td>{member.LastName}</td>
+                        <td>{member.StudentId}</td>
+                        <td>{member.DateOfBirth}</td>
+                        <td>{member.Batch}</td>
+                        <td>{member.CourseName}</td>
+                        <td>{member.DeptName}</td>
+                        <td>{member.Email}</td>
+                        <td>{member.StudentMobileNo}</td>
+                        <td>{member.ResidentStatus}</td>
+                        <td>{member.FatherName}</td>
+                        <td>{member.ParentMobileNo}</td>
+                        <td>{member.District}</td>
+                        <td>{member.State}</td>
+                        <td>{member.Country}</td>
                         </tr>
                     )}
                     </tbody>
@@ -106,6 +111,8 @@ class Fees extends React.Component {
               </Card>
             </Col>        
           </Row>
+        </div>
+        <div className="content">
         </div>
       </>
     );

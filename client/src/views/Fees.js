@@ -22,6 +22,22 @@ class Fees extends React.Component {
       users1:[]
     };
     this.handleClick = this.handleClick.bind(this);
+  }
+  handleupdate = e => {
+    alert("Thank you for paying")
+    window.location.reload(false);
+    e.preventDefault();
+    const username=Cookies.get('name');
+    fetch('http://localhost:9000/users/feesupdate/'+username, {
+      method: 'POST',
+  },
+  )
+  .then(function(response) {
+      if (response.status >= 400) {
+          throw new Error("Bad response from server");
+      }
+      return response.json();
+  })
   } 
   handleClick() 
     {
@@ -42,7 +58,8 @@ class Fees extends React.Component {
       console.log('caught it!',err);
       })
       let self1 = this;
-      fetch('http://localhost:9000/users/feesstatus', {
+      const username=Cookies.get('name')
+      fetch('http://localhost:9000/users/feesstatus/'+username, {
           method: 'GET'
       }).then(function(response) {
           if (response.status >= 400) {
@@ -119,22 +136,22 @@ class Fees extends React.Component {
                   <CardTitle tag="h4">Payment status</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <Table className="tablesorter">
+                <Table className="tablesorter">
                     <thead className="text-primary">
                       <tr>
+                        <th>StudentId</th>
                         <th>CourseName</th>
-                        <th>FeeHead</th>
-                        <th>Amount(INR)</th>
-                        <th>Payment Status</th>
+                        <th>TotalAmount</th>
+                        <th>PaymentStatus</th>
                       </tr>
                     </thead>
                     <tbody>
-                    {this.state.users.map(member =>
+                    {this.state.users1.map(member =>
                         <tr key={member.id}>
-                        <td>Msc Software Systems</td>
-                        <td>{member.FeeHead}</td>
-                        <td><span className="WebRupee">&#x20B9; </span>74405</td>
-                        <td>{member.FeeHead}</td>
+                        <td>{member.StudentId}</td>
+                        <td>{member.CourseName}</td>
+                        <td><span className="WebRupee">&#x20B9; </span>{member.TotalAmount}</td>
+                        <td>{member.PaymentStatus}</td>
                         </tr>
                     )}
                     </tbody>
@@ -143,6 +160,8 @@ class Fees extends React.Component {
               </Card>
             </Col>        
           </Row>
+          <center><Button color="dark" className="pay" onClick={this.handleupdate}>Pay online</Button></center>
+          <br></br>
         </div>
       </>
     );

@@ -5,6 +5,7 @@ import Button from '../components/elements/Button';
 import axios from "axios";
 import auth from '../Auth';
 import Cookies from 'js-cookie'
+import DribbleButton from 'react-dribble-button';
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
   Object.values(formErrors).forEach(val => {
@@ -64,6 +65,11 @@ class App extends Component {
   };
 
   handle = e =>{
+    e.preventDefault();
+    this.props.history.push('/');
+  }
+
+  handleback = e =>{
     e.preventDefault();
     this.props.history.push('/');
   }
@@ -169,6 +175,9 @@ class App extends Component {
               }
           }} 
         /> 
+        </div>
+        <div className="backbutton">
+            <a href="/"><DribbleButton color="black"  animationDuration={1000}>Back</DribbleButton></a>
         </div>
         <div className="form-wrapper">
             <p>{this.state.apiResponse}</p>

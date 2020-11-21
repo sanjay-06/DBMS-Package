@@ -18,6 +18,7 @@ import result from './views/semresult';
 import hostelfee from './views/hostelfee';
 import hostelallot from './views/hostel';
 import staff from './views/staff'
+import student from './views/student'
 import { ProtectedRoute } from './utils/Authenticated';
 import {ProtectedRoute1} from './utils/AuthenticatedComponent'
 
@@ -60,6 +61,7 @@ const App = () => {
           <ProtectedRoute exact path="/hostelfee" component={hostelfee}/>
           <AppRoute exact path="/login1" component={loginstaff}/>
           <ProtectedRoute1 exact path="/upload" component={staff}/>
+          <ProtectedRoute1 exact path="/student" component={student}/>
         </Switch>
       )} />
   );

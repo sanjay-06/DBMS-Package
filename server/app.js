@@ -17,6 +17,10 @@ var hostelallot=require('./routes/hostelallot');
 var semtimetable=require('./routes/semtimetablerouter');
 var staffuser=require('./routes/staffuser');
 var editor=require('./routes/editor');
+var semresult=require('./routes/sessionhandler');
+var send=require('./routes/testAPI');
+var updatepay=require('./routes/pay');
+var stud=require('./routes/student')
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -40,7 +44,10 @@ app.use("/users/hostelallot",hostelallot);
 app.use("/users/semtimetable",semtimetable);
 app.use('/users/staffs',staffuser);
 app.use('/admin/marks',editor);
-
+app.use('/admin/students',stud);
+app.use('/users/semmarks',semresult);
+app.use('/users/feesstatus',send);
+app.use('/users/feesupdate',updatepay);
 //app.use("/users/fees",feestable);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

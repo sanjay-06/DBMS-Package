@@ -7,6 +7,9 @@ const hostelfee = require('../models/hostelfeemodel');
 const hostelallot = require('../models/hostelallot');
 const semtimetable = require('../models/semtimetablemodel');
 const staffUser =require('../models/staffmodel');
+const semmodel=require('../models/semmodel');
+const paystatus=require('../models/paymodel');
+const studmodel=require('../models/studmodel')
 
 function init()
 {
@@ -19,6 +22,9 @@ function init()
     await hostelallot.sync();
     await semtimetable.sync();
     await staffUser.sync();
+    await semmodel.sync();
+    await paystatus.sync();
+    await studmodel.sync();
 }
 
 init();

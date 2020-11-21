@@ -114,7 +114,12 @@ light green: #A3C4BC
     flex-direction: column;
     margin-bottom: 15px;
   }
-  
+  .backbutton{
+    position:relative;
+    margin-left: 90%;
+    align-items:right;
+    bottom:15%;
+  }
   .firstName
   {
     width: 100%;
@@ -132,3 +137,7 @@ light green: #A3C4BC
     align-items: center;
   }
   
+  .pay
+  {
+    align-items: center;
+  }

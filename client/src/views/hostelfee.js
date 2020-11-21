@@ -95,7 +95,7 @@ class Fees extends React.Component {
                     {this.state.users.map(member =>
                         <tr key={member.id}>
                         <td>{member.Head} </td>
-                        <td>{member.Amount}</td>
+                        <td><span className="WebRupee">&#x20B9; </span>{member.Amount}</td>
                         </tr>
                     )}
                     </tbody>

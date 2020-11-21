@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser=require('body-parser');
-var editor=require('../models/editormodel1');
-const mark1 = require('../models/markmodel1');
-const mark2 = require('../models/markmodel2');
 var sequelize=require('../connection/dbconnection');
 var {QueryTypes}=require('sequelize');
 router.use(bodyParser.json());

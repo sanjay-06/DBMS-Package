@@ -61,14 +61,8 @@ class Fees extends React.Component {
       <>
       <Navbar bg="dark" variant="dark">
     <Nav className="mr-auto">
-      <Nav.Link href="/dashboard">Home</Nav.Link>
-      <Nav.Link href="/attendance">Attendance Info</Nav.Link>
-      <Nav.Link href="/ca">Internal Marks</Nav.Link>
-      <Nav.Link href="/timetable">Sem timetable</Nav.Link>
-      <Nav.Link href="/results">Sem Results</Nav.Link>
-      <NavDropdown title="Hostel" id="basic-nav-dropdown">
-        <NavDropdown.Divider />
-      </NavDropdown>
+      <Nav.Link href="/upload">Home</Nav.Link>
+      <Nav.Link href="/student">student details</Nav.Link>
     </Nav>
     <Button color="dark" className="logout" onClick={()=>{
       auth.logout(()=>{

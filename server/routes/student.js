@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser=require('body-parser');
-const semmodal = require('../models/semmodel');
+const model = require('../models/studmodel');
 
 router.use(bodyParser.json());
 
-router.get('/:id',async(req,res)=> {
-  let row = await semmodal.findAll({where:{StudentId:req.params.id}});
+router.get('/',async(req,res)=> {
+  let row = await model.findAll();
   console.log(row);
   res.json(row);
 });

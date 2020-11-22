@@ -112,8 +112,6 @@ class Fees extends React.Component {
             </Col>        
           </Row>
         </div>
-        <div className="content">
-        </div>
       </>
     );
   }

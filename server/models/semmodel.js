@@ -28,6 +28,11 @@ const marks = sequelize.define('semresults', {
       type: DataTypes.STRING,
       allowNull: false
   },
+  Gradepoint:
+  {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   Result:
 {
     type: DataTypes.STRING,

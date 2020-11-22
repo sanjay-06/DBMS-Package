@@ -43,6 +43,18 @@ class Fees extends React.Component {
       }).catch(err => {
       console.log('caught it!',err);
       })
+      fetch('http://localhost:9000/users/semmarks/'+username+'/cgpa', {
+        method: 'GET'
+    }).then(function(response) {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json();
+    }).then(function(data) {
+        self.setState({users1: data});
+    }).catch(err => {
+    console.log('caught it!',err);
+    })
     }
   render() {
     return (
@@ -96,7 +108,36 @@ class Fees extends React.Component {
                         <td>{member.SubjectId}</td>
                         <td>{member.SubjectName} </td>
                         <td>{member.Credit}</td>
-                        <td>{member.Grade} </td>
+                        <td>{member.Gradepoint} {member.Grade}</td>
+                        <td>{member.Result}</td>
+                        </tr>
+                    )}
+                    </tbody>
+                  </Table>
+                </CardBody>
+              </Card>
+            </Col>        
+          </Row>
+          <Row>
+            <Col>
+              <Card>
+                <CardHeader>
+                  <CardTitle tag="h4">Sem CGPA</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <Table className="tablesorter">
+                    <thead className="text-primary">
+                      <tr>
+                        <th>StudentId</th>
+                        <th>Cgpa</th>
+                        <th>Result</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.users1.map(member =>
+                        <tr key={member.id}>
+                        <td>{member.StudentId} </td>
+                        <td>{member.cgpa}</td>
                         <td>{member.Result}</td>
                         </tr>
                     )}
@@ -107,6 +148,7 @@ class Fees extends React.Component {
             </Col>        
           </Row>
         </div>
+        
       </>
     );
   }

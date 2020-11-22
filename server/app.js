@@ -20,7 +20,8 @@ var editor=require('./routes/editor');
 var semresult=require('./routes/sessionhandler');
 var send=require('./routes/testAPI');
 var updatepay=require('./routes/pay');
-var stud=require('./routes/student')
+var stud=require('./routes/student');
+var hostelpay=require('./routes/hostelpay');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -48,6 +49,8 @@ app.use('/admin/students',stud);
 app.use('/users/semmarks',semresult);
 app.use('/users/feesstatus',send);
 app.use('/users/feesupdate',updatepay);
+app.use('/users/hostelpay',hostelpay);
+
 //app.use("/users/fees",feestable);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

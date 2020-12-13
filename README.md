@@ -5,6 +5,8 @@ This is a webpage made with React.js/Node.js
 
 ![gitlogo](login.png)
 
+![gitlogo](captured.gif)
+
 # Package Usage
 
 ## Quick start

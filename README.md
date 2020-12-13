@@ -10,7 +10,7 @@ This is a webpage made with React.js/Node.js
 ## Quick start
 
 ### Website Link
-<a href="https://sanjay-ecampus.herokuapp.com/">CLICK HERE ITS THE APP LINK</a>
+<a href="https://sanjay-ecampus.herokuapp.com/" target="new">CLICK HERE ITS THE APP LINK</a>
 
 #### Start the server
       npm start

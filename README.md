@@ -1,4 +1,4 @@
-# web-design-package
+# Dbms-package
 This is a webpage made with React.js/Node.js
 
 <h1>WEBSITE</h1>

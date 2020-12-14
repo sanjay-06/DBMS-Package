@@ -7,7 +7,7 @@ This is a webpage made with React.js/Node.js
 
 ![gitlogo](captured.gif)
 
-![gitlogo](ER Diagram.png)
+![gitlogo](diagram.PNG)
 
 # Package Usage
 

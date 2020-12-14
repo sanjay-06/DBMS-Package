@@ -7,8 +7,6 @@ This is a webpage made with React.js/Node.js
 
 ![gitlogo](captured.gif)
 
-# ER Diagram for MYSQL
-
 ![gitlogo](ER Diagram.png)
 
 # Package Usage

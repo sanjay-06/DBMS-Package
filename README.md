@@ -7,6 +7,8 @@ This is a webpage made with React.js/Node.js
 
 ![gitlogo](captured.gif)
 
+# Enhanced Relationship Diagram for the project in MYSQL
+
 ![gitlogo](diagram.PNG)
 
 # Package Usage
